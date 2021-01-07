@@ -1,0 +1,17 @@
+server:
+  port: 8888
+swagger:
+  base-package: org.basis.config
+  description: 配置服务
+  enabled: true
+spring:
+  profiles:
+    active:  ${SPRING_PROFILES_ACTIVE:development}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS

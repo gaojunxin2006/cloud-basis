@@ -1,0 +1,31 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: basis-zuul
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka:gemii@127.0.0.1:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+zuul:
+  prefix: /basis/api/
+  strip-prefix: true
+  sensitive-headers: #转发时不对请求头过滤
+#  routes:
+#    authuser:
+#      path: /basis-authuser/**
+#      service-id: basis-authuser
+security:
+  oauth2:
+    client:
+      access-token-uri: http://basis-authuser/basis/api/oauth/token
+      user-authorization-uri: http://basis-authuser/basis/api/oauth/authorize
+    authorization:
+      check-token-access: http://basis-authuser/basis/api/oauth/check_token
+    resource:
+      user-info-uri: http://basis-authuser/basis/api/oauth/check_token
+logging:
+  level:
+    org.springframework: debug

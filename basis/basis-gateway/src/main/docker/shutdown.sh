@@ -1,0 +1,1 @@
+sleep 180;netstat -ntlp |grep -v '9999'|grep 'java'|awk '{print $4}'|awk -F ':' '{print $2}'|xargs -t -i curl -X POST http://127.0.0.1:{}/actuator/service-registry?status=DOWN -H 'Content-Type: application/vnd.spring-boot.actuator.v2+json;charset=UTF-8';sleep 30

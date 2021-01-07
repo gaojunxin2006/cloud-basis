@@ -1,0 +1,75 @@
+server:
+  port: 8083
+  error:
+    path: /error/info
+swagger:
+  base-package: org.basis
+  description: 授权服务
+  enabled: true
+  authorization:
+    key-name: Authorization
+spring:
+  redis:
+    database: 3
+    host: 172.16.11.151
+    port: 6379
+    pool:
+      max-active: 10
+      max-idle: 10
+      max-wait: -1
+      min-idle: 0
+  rabbitmq:
+    host: 172.16.11.151
+    port: 5672
+    virtual-host: my_vhost
+    username: admin
+    password: admin
+  datasource:
+    url: jdbc:mysql://172.16.11.159:3306/liz_qywechat?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+    username: root
+    password: 69658757
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    tomcat:
+      test-while-idle: true
+      validation-query: SELECT 1
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
+    redis:
+      enabled: false
+  health:
+    db:
+      enabled: false
+feign:
+  httpclient:
+    max-connections: 1000
+    connection-timeout: 5000
+    time-to-live: 10000
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+ribbon:
+  #处理请求的超时时间，默认为1秒,改成 30s
+  ReadTimeout: 30000
+  #连接建立的超时时长，默认1秒,改成 5s
+  ConnectTimeout: 5000
+xxl-job:
+  admin:
+    admin-addresses: http://172.16.11.158:30212/xxl-job-admin/
+#    admin-addresses: http://${LIZ_XXL_JOB_SERVICE_SERVICE_HOST}:${LIZ_XXL_JOB_SERVICE_SERVICE_PORT}
+
+  executor:
+    app-name: basis-authuser #默认为 xxl-job-executor
+    access-token: #默认为空
+    log-path: log/jobhandler #默认为 logs/applogs/xxl-job/jobhandler
+    log-retention-days: 10 #默认为 10
+    ip: #默认为空
+    port: 9999 #默认为 9999
+

@@ -1,0 +1,16 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: basis-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true #开启从注册中心动态创建路由的功能
+          lower-case-service-id: true #使用小写服务名，默认是大写
+      httpclient:
+        connect-timeout: 1200 #连接最长20分钟
+logging:
+  level:
+    org.springframework.cloud.gateway: debugs

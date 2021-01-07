@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<contextName>${HOSTNAME}</contextName>
+	<property name="default_pattern"
+		value="%d{yyyy-MM-dd HH:mm:ss.SSS} %contextName [%20thread --- traceId:[%X{X-B3-TraceId:-}:%X{X-B3-SpanId:-}:%X{X-B3-ParentSpanId:-}]] %-5level %logger{100} - %msg%n" />
+
+
+	<!-- DEBUG文件 -->
+	<appender name="DEBUG-FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>log/debug.log</file>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>log/debug-%d{yyyy-MM-dd}.log
+			</FileNamePattern>
+			<maxHistory>2</maxHistory>
+		</rollingPolicy>
+		<layout>
+			<pattern>${default_pattern}</pattern>
+		</layout>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>DEBUG</level>
+		</filter>
+	</appender>
+	<!-- 异步输出 -->
+	<appender name="ASYNC-DEBUG"
+		class="ch.qos.logback.classic.AsyncAppender">
+		<!-- 不丢失日志.默认的,如果队列的80%已满,则会丢弃TRACT、DEBUG、INFO级别的日志 -->
+		<discardingThreshold>0</discardingThreshold>
+		<!-- 更改默认的队列的深度,该值会影响性能.默认值为256 -->
+		<queueSize>256</queueSize>
+		<!-- 添加附加的appender,最多只能添加一个 -->
+		<appender-ref ref="DEBUG-FILE" />
+	</appender>
+	<!-- WARN文件 -->
+	<appender name="WARN-FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>log/warn.log</file>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>log/warn-%d{yyyy-MM-dd}.log
+			</FileNamePattern>
+			<maxHistory>2</maxHistory>
+		</rollingPolicy>
+		<layout>
+			<pattern>${default_pattern}</pattern>
+		</layout>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>WARN</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+	</appender>
+	<!-- 异步输出 -->
+	<appender name="ASYNC-WARN"
+		class="ch.qos.logback.classic.AsyncAppender">
+		<!-- 不丢失日志.默认的,如果队列的80%已满,则会丢弃TRACT、DEBUG、INFO级别的日志 -->
+		<discardingThreshold>0</discardingThreshold>
+		<!-- 更改默认的队列的深度,该值会影响性能.默认值为256 -->
+		<queueSize>256</queueSize>
+		<!-- 添加附加的appender,最多只能添加一个 -->
+		<appender-ref ref="WARN-FILE" />
+	</appender>
+	<!-- ERROR文件 -->
+	<appender name="ERROR-FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>log/error.log</file>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>log/error-%d{yyyy-MM-dd}.log
+			</FileNamePattern>
+			<maxHistory>2</maxHistory>
+		</rollingPolicy>
+		<layout>
+			<pattern>${default_pattern}</pattern>
+		</layout>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>ERROR</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+	</appender>
+	<!-- 异步输出 -->
+	<appender name="ASYNC-ERROR"
+		class="ch.qos.logback.classic.AsyncAppender">
+		<!-- 不丢失日志.默认的,如果队列的80%已满,则会丢弃TRACT、DEBUG、INFO级别的日志 -->
+		<discardingThreshold>0</discardingThreshold>
+		<!-- 更改默认的队列的深度,该值会影响性能.默认值为256 -->
+		<queueSize>256</queueSize>
+		<!-- 添加附加的appender,最多只能添加一个 -->
+		<appender-ref ref="ERROR-FILE" />
+	</appender>
+	<springProfile name="test">
+		<appender name="STDOUT"
+			class="ch.qos.logback.core.ConsoleAppender">
+			<encoder
+				class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+				<pattern>${default_pattern}</pattern>
+			</encoder>
+			<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+				<level>INFO</level>
+			</filter>
+		</appender>
+		<root>
+			<level value="INFO" />
+			<appender-ref ref="STDOUT" />
+			<appender-ref ref="DEBUG-FILE" />
+			<appender-ref ref="WARN-FILE" />
+			<appender-ref ref="ERROR-FILE" />
+		</root>
+		<logger name="org.basis">
+			<level value="INFO" />
+		</logger>
+	</springProfile>
+
+	<springProfile name="development">
+		<appender name="STDOUT"
+			class="ch.qos.logback.core.ConsoleAppender">
+			<encoder
+				class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+				<pattern>${default_pattern}</pattern>
+			</encoder>
+			<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+				<level>DEBUG</level>
+			</filter>
+		</appender>
+		<root>
+			<level value="DEBUG" />
+			<appender-ref ref="STDOUT" />
+			<appender-ref ref="DEBUG-FILE" />
+			<appender-ref ref="WARN-FILE" />
+			<appender-ref ref="ERROR-FILE" />
+		</root>
+		<logger name="org.basis">
+			<level value="DEBUG" />
+		</logger>
+	</springProfile>
+
+	<springProfile name="cloud">
+		<appender name="STDOUT"
+			class="ch.qos.logback.core.ConsoleAppender">
+			<encoder
+				class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+				<pattern>${default_pattern}</pattern>
+			</encoder>
+			<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+				<level>INFO</level>
+			</filter>
+		</appender>
+		<root>
+			<level value="INFO" />
+			<appender-ref ref="STDOUT" />
+			<appender-ref ref="DEBUG-FILE" />
+			<appender-ref ref="WARN-FILE" />
+			<appender-ref ref="ERROR-FILE" />
+		</root>
+		<logger name="org.basis">
+			<level value="DEBUG" />
+		</logger>
+	</springProfile>
+	<springProfile name="default">
+		<appender name="STDOUT"
+			class="ch.qos.logback.core.ConsoleAppender">
+			<encoder
+				class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+				<pattern>${default_pattern}</pattern>
+			</encoder>
+			<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+				<level>INFO</level>
+			</filter>
+		</appender>
+		<root>
+			<level value="DEBUG" />
+			<appender-ref ref="STDOUT" />
+			<appender-ref ref="DEBUG-FILE" />
+			<appender-ref ref="WARN-FILE" />
+			<appender-ref ref="ERROR-FILE" />
+		</root>
+		<logger name="org.basis">
+			<level value="DEBUG" />
+		</logger>
+	</springProfile>
+
+	<logger name="org.basis.security">
+		<level value="ERROR" />
+	</logger>
+	<logger name="org.springframework">
+		<level value="INFO" />
+	</logger>
+
+	<logger name="druid.sql">
+		<level value="WARN" />
+	</logger>
+
+	<logger name="com.alibaba.druid">
+		<level value="WARN" />
+	</logger>
+
+	<logger name="com.sun">
+		<level value="ERROR" />
+	</logger>
+	<logger name="javax.activation">
+		<level value="ERROR" />
+	</logger>
+
+	<logger name="net.sf.ehcache">
+		<level value="ERROR" />
+	</logger>
+
+	<logger name="org.hibernate">
+		<level value="INFO" />
+	</logger>
+
+	<logger name="org.apache">
+		<level value="ERROR" />
+	</logger>
+
+	<logger name="com.alibaba.dubbo">
+		<level value="WARN" />
+	</logger>
+
+	<logger name="net.rubyeye.xmemcached">
+		<level value="ERROR" />
+	</logger>
+
+	<logger name="com.google.code">
+		<level value="ERROR" />
+	</logger>
+
+	<logger name="com.netflix">
+		<level value="ERROR" />
+	</logger>
+
+	<logger name="org.dozer">
+		<level value="ERROR" />
+	</logger>
+
+	<logger name="springfox">
+		<level value="ERROR" />
+	</logger>
+
+	<logger name="sun.net.www">
+		<level value="ERROR" />
+	</logger>
+
+	<logger name="org.mongodb">
+		<level value="ERROR" />
+	</logger>
+	<logger name="com.alibaba.nacos.client">
+		<level value="WARN" />
+	</logger>
+</configuration>

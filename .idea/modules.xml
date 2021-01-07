@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/basis/basis.iml" filepath="$PROJECT_DIR$/basis/basis.iml" />
+      <module fileurl="file://$PROJECT_DIR$/basis/basis-authuser/basis-authuser.iml" filepath="$PROJECT_DIR$/basis/basis-authuser/basis-authuser.iml" />
+      <module fileurl="file://$PROJECT_DIR$/basis/basis-gateway/basis-gateway.iml" filepath="$PROJECT_DIR$/basis/basis-gateway/basis-gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cloud-basis.iml" filepath="$PROJECT_DIR$/cloud-basis.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/common.iml" filepath="$PROJECT_DIR$/common/common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/common-sdk/common-sdk.iml" filepath="$PROJECT_DIR$/common/common-sdk/common-sdk.iml" />
+      <module fileurl="file://$PROJECT_DIR$/qywechat/qywechat.iml" filepath="$PROJECT_DIR$/qywechat/qywechat.iml" />
+    </modules>
+  </component>
+</project>

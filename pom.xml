@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.1.5.RELEASE</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.gemii.ncloud</groupId>
+	<artifactId>cloud-basis</artifactId>
+	<version>51991-1.0</version>
+	<name>Gemii cloud basis root pom</name>
+	<packaging>pom</packaging>
+
+	<description>cloud basis project for Spring Boot</description>
+
+	<!--	<properties>-->
+	<!--		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>-->
+	<!--		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>-->
+	<!--		<spring-boot-admin.version>2.1.5</spring-boot-admin.version>-->
+	<!--		<java.version>1.8</java.version>-->
+	<!--		<cloudbasis-version>51991-1.0</cloudbasis-version>-->
+	<!--		<spring-cloud.version>Greenwich.SR2</spring-cloud.version>-->
+	<!--		<kubeimage.version>51991</kubeimage.version>-->
+	<!--		<docker.mvnhup>lizcloud-hub</docker.mvnhup>-->
+	<!--		<docker.registry>hub.docker.gemii.cc:7443/</docker.registry>-->
+	<!--		<docker.registry.url>https://hub.docker.gemii.cc:7443/</docker.registry.url>-->
+	<!--		<docker.image.prefix>lizbasis</docker.image.prefix>-->
+	<!--	</properties>-->
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<spring-boot-admin.version>2.1.5</spring-boot-admin.version>
+		<java.version>1.8</java.version>
+		<cloudbasis-version>51991-1.0</cloudbasis-version>
+		<spring-cloud.version>Greenwich.SR2</spring-cloud.version>
+		<kubeimage.version>51991</kubeimage.version>
+		<docker.mvnhup>lizcloud-hub</docker.mvnhup>
+		<docker.registry>172.16.11.154:5000/</docker.registry>
+<!--		<docker.registry.url>https://172.16.11.154:2375/</docker.registry.url>-->
+		<docker.image.prefix>lizbasis</docker.image.prefix>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+		</dependency>
+		<!-- 整合nacos服务注册发现配置客户端 -->
+		<dependency>
+			<groupId>com.alibaba.cloud</groupId>
+			<artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+			<version>2.1.0.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba.cloud</groupId>
+			<artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+			<version>2.1.0.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+		</dependency>
+	</dependencies>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>de.codecentric</groupId>
+				<artifactId>spring-boot-admin-dependencies</artifactId>
+				<version>${spring-boot-admin.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	<!-- release -->
+	<distributionManagement>
+		<!--		<repository>-->
+		<!--			<id>releases</id>-->
+		<!--			<-->
+		<!--			<name>User Project Release</name>-->
+		<!--			&lt;!&ndash; <url>http://192.168.0.121:8081/nexus/content/repositories/releases/</url> &ndash;&gt;-->
+		<!--			<url>http://maven.gemii.cc:8081/repository/maven-releases/</url>-->
+		<!--		</repository>-->
+
+		<!--		<snapshotRepository>-->
+		<!--			<id>snapshots</id>-->
+		<!--			<name>User Project SNAPSHOTS</name>-->
+		<!--			<url>http://maven.gemii.cc:8081/repository/maven-snapshots/</url>-->
+		<!--		</snapshotRepository>-->
+		<repository>
+			<id>releases</id>
+			<name>User Project Release</name>
+			<!-- <url>http://192.168.0.121:8081/nexus/content/repositories/releases/</url> -->
+			<url>http://172.16.11.120:8081/repository/maven-releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>snapshots</id>
+			<name>User Project snapshots</name>
+			<!-- <url>http://192.168.0.121:8081/nexus/content/repositories/releases/</url> -->
+			<url>http://172.16.11.120:8081/repository/maven-snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+
+
+	<profiles>
+		<profile>
+			<id>default</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<modules>
+				<module>basis</module>
+				<!--<module>service</module> -->
+				<module>common</module>
+				<module>qywechat</module>
+			</modules>
+		</profile>
+	</profiles>
+</project>

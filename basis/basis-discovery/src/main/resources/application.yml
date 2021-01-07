@@ -1,0 +1,30 @@
+##服务端口号
+server:
+  port: 8761
+##服务名称
+spring:
+  application:
+    name: basis-discovery
+  security:
+    user:
+      name: eureka
+      password: gemii
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:${server.port}/eureka/
+    ## 单机版不注册服务本身
+    register-with-eureka: false
+    ## 单机版不从注册中间检索服务信息
+    fetch-registry: false
+  server:
+    enable-self-preservation: false #开发环境关闭自我保护
+swagger:
+  base-package: org
+  description: 注册服务
+  enabled: true 
+    
+    
+    

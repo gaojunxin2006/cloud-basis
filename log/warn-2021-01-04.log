@@ -1,0 +1,4 @@
+2021-01-04 11:35:31.833 gaojunxin [                main --- traceId:[::]] WARN  org.springframework.boot.actuate.endpoint.EndpointId - Endpoint ID 'nacos-config' contains invalid characters, please migrate to a valid format.
+2021-01-04 11:35:31.837 gaojunxin [                main --- traceId:[::]] WARN  org.springframework.boot.actuate.endpoint.EndpointId - Endpoint ID 'nacos-discovery' contains invalid characters, please migrate to a valid format.
+2021-01-04 11:35:32.020 gaojunxin [                main --- traceId:[::]] WARN  org.springframework.boot.actuate.endpoint.EndpointId - Endpoint ID 'service-registry' contains invalid characters, please migrate to a valid format.
+2021-01-04 11:35:36.372 gaojunxin [                main --- traceId:[::]] WARN  o.s.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration - Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)

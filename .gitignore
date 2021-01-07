@@ -1,0 +1,4 @@
+# Project exclude paths
+/basis/basis-authuser/target/
+/basis/basis-gateway/target/
+/common/common-sdk/target/

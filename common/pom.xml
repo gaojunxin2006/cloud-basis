@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.gemii.ncloud</groupId>
+		<artifactId>cloud-basis</artifactId>
+		<version>51991-1.0</version>
+	</parent>
+	<artifactId>common</artifactId>
+	<packaging>pom</packaging>
+	<name>Gemii cloud basis common pom</name>
+	<description>Gemii Liz Cloud - LizCloud Common Libary</description>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven-jar-plugin.version>3.0.0</maven-jar-plugin.version>
+		<hutool.version>[4.1.12,)</hutool.version>
+		<mybatis-plus.version>3.3.1</mybatis-plus.version>
+	</properties>
+	<dependencyManagement>
+		<dependencies>
+			<!--引入swagger -->
+			<dependency>
+				<groupId>com.spring4all</groupId>
+				<artifactId>swagger-spring-boot-starter</artifactId>
+				<version>1.9.1.RELEASE</version>
+			</dependency>
+			<!-- 引入mybatis plus -->
+			<dependency>
+				<groupId>com.baomidou</groupId>
+				<artifactId>mybatis-plus-boot-starter</artifactId>
+				<version>${mybatis-plus.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	<dependencies>
+		<dependency>
+			<groupId>cn.hutool</groupId>
+			<artifactId>hutool-all</artifactId>
+			<version>${hutool.version}</version>
+		</dependency>
+	</dependencies>
+	<modules>
+		<module>common-sdk</module>
+		<!-- <module>qywechat-common-pojo</module> -->
+	</modules>
+</project>
